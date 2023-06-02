@@ -15,6 +15,8 @@ private:
     static int Parent(int index);
 
     void fixHeap(int index);
+    void insertAt(Item* item, int indexAt);
+    void updatePos(Item* item, int newIndex);
 
 public:
     const bool TYPE_MIN = false;
@@ -25,5 +27,5 @@ public:
     Item* Top();
     Item* DeleteTop();
     void Insert(Item* item);
-
+    void Delete(int index);
 };

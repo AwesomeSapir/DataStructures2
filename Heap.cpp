@@ -1,5 +1,3 @@
-
-
 #include "Heap.h"
 
 int Heap::Left(int index) {
@@ -21,7 +19,7 @@ Item* Heap::Top() {
 Item* Heap::DeleteTop() {
     Item* max = items[0];
     size--;
-    items[0] = items[size];
+    updatePos(items[size], 0);
     fixHeap(0);
     return max;
 }
@@ -54,19 +52,48 @@ void Heap::fixHeap(int index) {
 
     if(top != index) {
         Item* temp = items[index];
-        items[index] = items[top];
-        items[top] = temp;
+        updatePos(items[top], index);
+        updatePos(temp, top);
         fixHeap(top);
     }
 }
 
 void Heap::Insert(Item* item) {
-    int index = size;
+    insertAt(item, size);
     size++;
-
-    while ((index > 0) && (items[Parent(index)]->priority < item->priority)){
-        items[index] = items[Parent(index)];
-        index = Parent(index);
-    }
-    items[index] = item;
 }
+
+void Heap::Delete(int index) {
+    size--;
+    if(index != size){
+        insertAt(items[size], index);
+    }
+}
+
+void Heap::insertAt(Item *item, int indexAt) {
+    int index = indexAt;
+
+    if (type == TYPE_MAX){
+        while ((index > 0) && (items[Parent(index)]->priority < item->priority)){
+            updatePos(items[Parent(index)], index);
+            index = Parent(index);
+        }
+    } else { //type == TYPE_MIN
+        while ((index > 0) && (items[Parent(index)]->priority > item->priority)){
+            updatePos(items[Parent(index)], index);
+            index = Parent(index);
+        }
+    }
+
+    updatePos(item, index);
+}
+
+void Heap::updatePos(Item* item, int newIndex) {
+    items[newIndex] = item;
+    if(type == TYPE_MAX){
+        item->indexMax = newIndex;
+    } else {
+        item->indexMin = newIndex;
+    }
+}
+
