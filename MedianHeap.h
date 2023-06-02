@@ -7,6 +7,7 @@ private:
     MinMax minmaxUpper;
     MinMax minmaxLower;
     Item* median;
+    int size = 0;
 public:
     Item* Max();
     Item* Min();
@@ -15,5 +16,4 @@ public:
     Item* DeleteMin();
     void CreateEmpty();
     void Insert(int priority, string value);
-
 };

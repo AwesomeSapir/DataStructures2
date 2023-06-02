@@ -19,8 +19,8 @@ private:
     void updatePos(Item* item, int newIndex);
 
 public:
-    const bool TYPE_MIN = false;
-    const bool TYPE_MAX = true;
+    static const bool TYPE_MIN = false;
+    static const bool TYPE_MAX = true;
 
     Heap(bool type) : type(type) {};
 

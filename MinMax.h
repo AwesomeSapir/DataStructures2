@@ -6,11 +6,17 @@ class MinMax {
 private:
     Heap minHeap;
     Heap maxHeap;
-    int size; //TODO
+    int size = 0;
 public:
     Item* Max();
     Item* Min();
     Item* DeleteMax();
     Item* DeleteMin();
     void Insert(Item* item);
+
+    int getSize() const;
+
+    void setSize(int size);
+
+    MinMax() : minHeap(Heap::TYPE_MIN), maxHeap(Heap::TYPE_MIN) {};
 };
