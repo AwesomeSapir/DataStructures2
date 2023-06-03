@@ -8,6 +8,7 @@ private:
     MinMax minmaxLower;
     Item* median;
     int size = 0;
+    void fix();
 public:
     Item* Max();
     Item* Min();

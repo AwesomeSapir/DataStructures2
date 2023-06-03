@@ -13,21 +13,29 @@ Item *MedianHeap::Median() {
 }
 
 Item *MedianHeap::DeleteMax() {
-    if(minmaxLower.getSize() == minmaxUpper.getSize()){ //Odd total size including median
-        minmaxUpper.Insert(median);
-        median = minmaxLower.DeleteMax();
+    Item* max;
+    if(minmaxUpper.getSize() == 0){
+        max = median;
+        median = nullptr;
+    } else {
+        max = minmaxUpper.DeleteMax();
     }
     size--;
-    return minmaxUpper.DeleteMax();
+    fix();
+    return max;
 }
 
 Item *MedianHeap::DeleteMin() {
-    if(minmaxLower.getSize() != minmaxUpper.getSize()){ //Even total size including median
-        minmaxLower.Insert(median);
-        median = minmaxUpper.DeleteMin();
+    Item* min;
+    if(minmaxLower.getSize() == 0){
+        min = median;
+        median = nullptr;
+    } else {
+        min = minmaxLower.DeleteMin();
     }
     size--;
-    return minmaxLower.DeleteMin();
+    fix();
+    return min;
 }
 
 void MedianHeap::CreateEmpty() {
@@ -36,45 +44,25 @@ void MedianHeap::CreateEmpty() {
 
 void MedianHeap::Insert(int priority, string value) {
     Item* item = new Item(priority, value);
-    if(size == 0){
+    if(median == nullptr){
         median = item;
-    } else if (size == 1){
-        if(median->priority < item->priority){
-            minmaxUpper.Insert(item);
-        } else {
-            minmaxUpper.Insert(median);
-            median = item;
-        }
-    } else if (size == 2){
-
+    } else if(priority < median->priority){
+        minmaxLower.Insert(item);
+    } else {
+        minmaxUpper.Insert(item);
     }
-
-
-    if(minmaxLower.getSize() == minmaxUpper.getSize()){ //Odd total size including median
-        if(priority > median->priority){
-            minmaxUpper.Insert(item);
-        } else {
-            minmaxUpper.Insert(median);
-            if (priority > minmaxLower.Max()->priority){
-                median = item;
-            } else {
-                median = minmaxLower.DeleteMax();
-                minmaxLower.Insert(item);
-            }
-        }
-
-    } else { //Even total size including median
-        if(priority < median->priority){
-            minmaxLower.Insert(item);
-        } else {
-            minmaxLower.Insert(median);
-            if(priority < minmaxUpper.Min()->priority){
-                median = item;
-            } else {
-                median = minmaxUpper.DeleteMin();
-                minmaxUpper.Insert(item);
-            }
-        }
-    }
+    fix();
     size++;
+}
+
+void MedianHeap::fix() {
+    if(minmaxLower.getSize() > minmaxUpper.getSize()){
+        minmaxUpper.Insert(median);
+        median = minmaxLower.DeleteMax();
+    } else if (minmaxLower.getSize()+1 < minmaxUpper.getSize()){
+        minmaxLower.Insert(median);
+        median = minmaxUpper.DeleteMin();
+    } else if (minmaxLower.getSize() == 0 && median == nullptr){
+        median = minmaxUpper.DeleteMin();
+    }
 }

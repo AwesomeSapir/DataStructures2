@@ -17,11 +17,11 @@ Item* Heap::Top() {
 }
 
 Item* Heap::DeleteTop() {
-    Item* max = items[0];
+    Item* top = items[0];
     size--;
     updatePos(items[size], 0);
     fixHeap(0);
-    return max;
+    return top;
 }
 
 void Heap::fixHeap(int index) {

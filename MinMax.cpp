@@ -8,17 +8,17 @@ Item *MinMax::Min() {
     return minHeap.Top();
 }
 
-Item *MinMax::DeleteMax() {
+Item* MinMax::DeleteMax() {
     Item* max = maxHeap.DeleteTop();
     minHeap.Delete(max->indexMin);
-    size++;
+    size--;
     return max;
 }
 
 Item *MinMax::DeleteMin() {
     Item* min = minHeap.DeleteTop();
-    minHeap.Delete(min->indexMax);
-    size++;
+    maxHeap.Delete(min->indexMax);
+    size--;
     return min;
 }
 

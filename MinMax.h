@@ -18,5 +18,5 @@ public:
 
     void setSize(int size);
 
-    MinMax() : minHeap(Heap::TYPE_MIN), maxHeap(Heap::TYPE_MIN) {};
+    MinMax() : minHeap(Heap::TYPE_MIN), maxHeap(Heap::TYPE_MAX) {};
 };
