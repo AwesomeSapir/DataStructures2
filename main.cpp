@@ -1,21 +1,23 @@
 #include <iostream>
 #include <array>
 #include "MedianHeap.h"
+#include "InputFunc.h"
+
 
 using namespace std;
 
 int main() {
+int i;
+
+try{
+    int n = InputFunc::getNumOfActions();
     MedianHeap* medianHeap;
-    int n;
-    cin >> n;
-    char c;
     Item* max;
     Item* min;
-    int priority;
+    int priority, i = 0;
     string value;
-
-    for (int i = 0; i < n; i++) {
-        cin >> c;
+    for (i; i < n; i++) {
+        char c = InputFunc::getAction(i, n);
         switch (c) {
             case 'a':
                 cout << medianHeap->Max()->priority << " " << medianHeap->Max()->data << endl;
@@ -45,4 +47,11 @@ int main() {
                 break;
         }
     }
+    }
+    catch (exception& e) {
+    
+    std::cout <<  e.what() << std::endl;
 }
+
+}
+
