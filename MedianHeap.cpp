@@ -56,13 +56,13 @@ void MedianHeap::Insert(int priority, string value) {
 }
 
 void MedianHeap::fix() {
-    if(minmaxLower.getSize() > minmaxUpper.getSize()){
+    if (minmaxLower.getSize() == 0 && median == nullptr && minmaxUpper.getSize()){
+        median = minmaxUpper.DeleteMin();
+    } else if(minmaxLower.getSize() > minmaxUpper.getSize()){
         minmaxUpper.Insert(median);
         median = minmaxLower.DeleteMax();
     } else if (minmaxLower.getSize()+1 < minmaxUpper.getSize()){
         minmaxLower.Insert(median);
-        median = minmaxUpper.DeleteMin();
-    } else if (minmaxLower.getSize() == 0 && median == nullptr){
         median = minmaxUpper.DeleteMin();
     }
 }

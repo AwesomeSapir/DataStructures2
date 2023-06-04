@@ -90,10 +90,12 @@ void Heap::insertAt(Item *item, int indexAt) {
 
 void Heap::updatePos(Item* item, int newIndex) {
     items[newIndex] = item;
-    if(type == TYPE_MAX){
-        item->indexMax = newIndex;
-    } else {
-        item->indexMin = newIndex;
+    if (item != nullptr) {
+        if (type == TYPE_MAX) {
+            item->indexMax = newIndex;
+        } else {
+            item->indexMin = newIndex;
+        }
     }
 }
 

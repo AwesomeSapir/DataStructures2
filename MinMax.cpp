@@ -31,7 +31,3 @@ void MinMax::Insert(Item* item) {
 int MinMax::getSize() const {
     return size;
 }
-
-void MinMax::setSize(int size) {
-    MinMax::size = size;
-}
