@@ -41,3 +41,41 @@ char InputFunc::getAction(int i, int n)
         return c;
     }
 }
+
+void InputFunc::handleAction(MedianHeap* medianHeap, char c) {
+    Item *max, *min;
+    int priority;
+    string value;
+    switch (c) {
+        case 'a':
+            cout << medianHeap->Max()->priority << " " << medianHeap->Max()->data << endl;
+            break;
+        case 'b':
+            max = medianHeap->DeleteMax();
+            cout << max->priority << " " << max->data << endl;
+            delete max;
+            break;
+        case 'c':
+            min = medianHeap->Min();
+            cout << min->priority << " " << min->data << endl;
+            break;
+        case 'd':
+            min = medianHeap->DeleteMin();
+            cout << min->priority << " " << min->data << endl;
+            delete min;
+            break;
+        case 'e':
+            medianHeap->CreateEmpty();
+            break;
+        case 'f':
+            cin >> value;
+            priority = stoi(value);
+            cin.get();
+            getline(cin, value);
+            medianHeap->Insert(priority, value);
+            break;
+        case 'g':
+            cout << medianHeap->Median()->priority << " " << medianHeap->Median()->data << endl;
+            break;
+    }
+}
