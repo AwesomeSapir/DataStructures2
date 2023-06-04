@@ -2,7 +2,7 @@
 
 using namespace std;
 
-static int getNumOfActions()
+int InputFunc::getNumOfActions()
 {
     int n;
     cin >> n;
@@ -16,29 +16,28 @@ static int getNumOfActions()
     }
 }
 
-static char getAction(int i, int n)
+char InputFunc::getAction(int i, int n)
 {
     char c;
     cin >> c;
-    
-    if (c < 'a' || c > 'g') 
+
+    if (c < 'a' || c > 'g')
     {
- throw invalid_argument("wrong input");    }
+        throw invalid_argument("wrong input");    }
     else if(i == 0 && c != 'e')
     {
- throw invalid_argument("wrong input");
-     }
+        throw invalid_argument("wrong input");
+    }
     else if(i != 0 && c == 'e')
     {
-         throw invalid_argument("wrong input");
+        throw invalid_argument("wrong input");
     }
-    else if (i == n-1 && c != '\n')
+    else if (i == n && c != '\n')
     {
-         throw invalid_argument("wrong input");
+        throw invalid_argument("wrong input");
     }
-     else
+    else
     {
         return c;
     }
-
 }

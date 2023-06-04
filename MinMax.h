@@ -8,11 +8,15 @@ private:
     Heap maxHeap;
     int size = 0;
 public:
-    Item* Max();
-    Item* Min();
-    Item* DeleteMax();
-    Item* DeleteMin();
-    void Insert(Item* item);
+    Item *Max();
+
+    Item *Min();
+
+    Item *DeleteMax();
+
+    Item *DeleteMin();
+
+    void Insert(Item *item);
 
     int getSize() const;
 

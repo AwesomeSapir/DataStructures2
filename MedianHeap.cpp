@@ -1,10 +1,23 @@
+#include <stdexcept>
 #include "MedianHeap.h"
 
 Item *MedianHeap::Max() {
+    if(minmaxUpper.getSize() == 0) {
+        if(median == nullptr){
+            throw invalid_argument("wrong input");
+        }
+        return median;
+    }
     return minmaxUpper.Max();
 }
 
 Item *MedianHeap::Min() {
+    if(minmaxLower.getSize() == 0) {
+        if(median == nullptr){
+            throw invalid_argument("wrong input");
+        }
+        return median;
+    }
     return minmaxLower.Min();
 }
 
@@ -13,6 +26,10 @@ Item *MedianHeap::Median() {
 }
 
 Item *MedianHeap::DeleteMax() {
+    if(size == 0){
+        throw invalid_argument("wrong input");
+    }
+
     Item* max;
     if(minmaxUpper.getSize() == 0){
         max = median;
@@ -26,6 +43,10 @@ Item *MedianHeap::DeleteMax() {
 }
 
 Item *MedianHeap::DeleteMin() {
+    if(size == 0){
+        throw invalid_argument("wrong input");
+    }
+
     Item* min;
     if(minmaxLower.getSize() == 0){
         min = median;
